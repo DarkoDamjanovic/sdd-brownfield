@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="banner.svg" alt="sdd-starter" width="800"/>
+  <img src="banner.svg" alt="sdd-brownfield" width="800"/>
 </p>
 
 <p align="center">
@@ -14,7 +14,7 @@
 
 <p align="center"><strong>An unopinionated spec-driven development workflow for AI coding assistants.</strong></p>
 
-<p align="center">Drop this folder into any project and give your AI a structured, consistent way to build software — from idea to tested implementation. No scripts, no tooling, no branching strategy. Just a few files and a process.</p>
+<p align="center">Drop this folder into an existing project and give your AI a structured, consistent way to evolve software — from current behavior to tested change. No scripts, no tooling, no branching strategy. Just a few files and a process.</p>
 
 <p align="center">
   <img src="https://img.shields.io/badge/Claude-D97706?style=for-the-badge&logo=anthropic&logoColor=white" alt="Claude"/>
@@ -36,7 +36,7 @@
 - [What Is AI Spec-Driven Development?](#what-is-ai-spec-driven-development)
 - [The Human Loop](#the-human-loop)
 - [Why This Beats Plain Prompting](#why-this-beats-plain-prompting)
-- [Why sdd-starter and Not Something Else](#why-sdd-starter-and-not-something-else)
+- [Why sdd-brownfield and Not Something Else](#why-sdd-brownfield-and-not-something-else)
 - [What's in This Repo](#whats-in-this-repo)
 - [Two Types of Specs](#two-types-of-specs)
 - [The Workflow](#the-workflow)
@@ -45,8 +45,8 @@
 - [Adapting the Workflow](#adapting-the-workflow)
 - [Handling Bugs](#handling-bugs)
 - [Extending the Workflow](#extending-the-workflow)
-- [Adding sdd-starter to an Existing Project](#adding-sdd-starter-to-an-existing-project)
-- [The Goal of sdd-starter](#the-goal-of-sdd-starter)
+- [Using sdd-brownfield in an Existing Project](#using-sdd-brownfield-in-an-existing-project)
+- [The Goal of sdd-brownfield](#the-goal-of-sdd-brownfield)
 - [Similar Projects](#similar-projects)
 - [License](#license)
 
@@ -59,10 +59,10 @@
 **Step 1 — From your project's root folder, run:**
 
 ```bash
-curl -fsSL https://github.com/DarkoDamjanovic/sdd-starter/archive/main.tar.gz \
-  | tar -xz sdd-starter-main/specs \
-  && mv sdd-starter-main/specs specs \
-  && rmdir sdd-starter-main
+curl -fsSL https://github.com/DarkoDamjanovic/sdd-brownfield/archive/main.tar.gz \
+  | tar -xz sdd-brownfield-main/specs \
+  && mv sdd-brownfield-main/specs specs \
+  && rmdir sdd-brownfield-main
 ```
 
 **Step 2 — Tell your AI to fill in the project description:**
@@ -125,7 +125,7 @@ The AI does the volume. You provide the direction, taste, and judgment. That div
 
 ## Why This Beats Plain Prompting
 
-| Without specs | With sdd-starter |
+| Without specs | With sdd-brownfield |
 |:---|:---|
 | AI invents requirements as it codes | Requirements are written and approved before coding |
 | Context is lost between sessions | Every session starts by reading the same spec files |
@@ -138,19 +138,19 @@ The AI does the volume. You provide the direction, taste, and judgment. That div
 
 <br/>
 
-## Why sdd-starter and Not Something Else
+## Why sdd-brownfield and Not Something Else
 
 There are heavier frameworks for spec-driven development. Most of them require custom tooling, scripts that run in CI, or a specific Git branching model to function.
 
-sdd-starter does none of that.
+sdd-brownfield does none of that.
 
 - **No hidden scripts.** Everything is plain Markdown files. Open them in any editor.
-- **No branching required.** You do not need feature branches, PR workflows, or merge strategies. You just tell your AI which feature to work on next. It reads `INDEX.md`, understands the current state, and picks up exactly where things left off.
+- **No branching required.** You do not need feature branches, PR workflows, or merge strategies. You just tell your AI which feature to work on next.
 - **No lock-in.** The workflow is text. Copy it, modify it, delete the parts you don't need.
 - **Zero footprint.** Everything lives inside a single `specs/` folder. Don't like it? Delete the folder and your project is exactly as it was before. Nothing else is touched.
 - **Works at any scale.** The same process fits a solo weekend project, a small team, a microservice, a CLI tool, or a large product.
 
-The only thing sdd-starter installs is a folder.
+The only thing sdd-brownfield installs is a folder.
 
 ---
 
@@ -162,7 +162,6 @@ The only thing sdd-starter installs is a folder.
 specs/
   WORKFLOW.md       ← The rules. Read this first.
   PROJECT.md        ← Your project description and personas. Fill this in.
-  INDEX.md          ← Live status dashboard of all features and foundation items.
   templates/
     feature/        ← Templates for user-facing features (6 files)
     foundation/     ← Templates for infrastructure and platform work (6 files)
@@ -241,16 +240,6 @@ Spec ──▶ Implement ──▶ Test
 
 **Don't want this three-phase structure?** Tell your AI: _"Simplify the workflow to a single phase: write a spec, then implement it. Remove the separate planning and testing phases."_
 
-### What `INDEX.md` does
-
-Every feature and infrastructure item lives in `INDEX.md` with its current status. Your AI keeps it in sync. When you start a new session, it reads this file and knows exactly what is in progress, what is blocked, and what is next. You never need to explain the project state — it is already written down.
-
-**Don't like how `INDEX.md` works?** Tell your AI: _"Change INDEX.md to [describe what you want instead]."_
-
----
-
-<br/>
-
 ## A Minimal Spec Example
 
 ```markdown
@@ -284,7 +273,7 @@ Acceptance criteria use BDD format — **Given** / **When** / **Then**. When AI 
 
 ## AI Compatibility
 
-sdd-starter works with any AI coding assistant that reads project files.
+sdd-brownfield works with any AI coding assistant that reads project files.
 
 Any capable model works. That said, this workflow gets the most out of models that reason well across long documents and maintain coherence across many files simultaneously. **Claude** (by Anthropic) is currently the strongest choice for this — it handles large specs, long task lists, and multi-file reasoning better than any other model available today.
 
@@ -366,8 +355,6 @@ A few examples:
 
 **Trigger spec creation with a slash command.** Tell your AI: _"Create a slash command `/new-feature` that reads WORKFLOW.md and walks me through creating a new feature spec."_ Now starting a spec is a single keystroke instead of a copy-paste from templates.
 
-**Auto-update INDEX.md with a hook.** Tell your AI: _"Set up a hook that updates INDEX.md whenever a spec status changes."_
-
 **Add a risk assessment to specs.** Tell your AI: _"Add a risk section to the feature spec template that covers security implications, data privacy, and rollback strategy."_
 
 The pattern is always the same: describe what you want, and let the AI figure out where it fits. The workflow is a text file — anything you can describe, your AI can add.
@@ -376,7 +363,7 @@ The pattern is always the same: describe what you want, and let the AI figure ou
 
 <br/>
 
-## Adding sdd-starter to an Existing Project
+## Using sdd-brownfield in an Existing Project
 
 There is no single right way. Several strategies work depending on the size of the project and how much existing code you want to cover. Choose the one that fits.
 
@@ -388,7 +375,7 @@ Don't touch existing code. From today, all new features and modifications go thr
 
 Tell your AI:
 ```
-Read specs/PROJECT.md and fill it in based on the existing codebase. Then create a specs/INDEX.md entry for each major existing area, marked as `done`. From now on, all new work goes through WORKFLOW.md.
+Read specs/PROJECT.md and fill it in based on the existing codebase. From now on, all new work goes through WORKFLOW.md.
 ```
 
 ---
@@ -421,7 +408,7 @@ Spec everything. Only practical for small-to-medium projects. Gives you a comple
 
 Tell your AI:
 ```
-Read the entire codebase and create a spec for every major feature and infrastructure item. Use WORKFLOW.md templates. Mark all existing items as `done` and build out INDEX.md from scratch.
+Read the entire codebase and create a spec for every major feature and infrastructure item. Use WORKFLOW.md templates. Mark all existing items as `done`.
 ```
 
 ---
@@ -432,19 +419,19 @@ No strategy is wrong. The goal is that future work has a spec. How much of the p
 
 <br/>
 
-## The Goal of sdd-starter
+## The Goal of sdd-brownfield
 
 This is meant to be the last SDD framework you use. Not because it is the best one — but because it should be the last one you need.
 
-Once you have experienced spec-driven development in action — once you have seen an AI read a spec, propose a plan, and build exactly what was described — you understand the pattern. And once you understand the pattern, you do not need someone else's framework anymore. You can create your own.
+Once you have experienced spec-driven development in an existing codebase — once you have seen an AI read a spec, inspect current behavior, propose a plan, and build exactly what was described — you understand the pattern. And once you understand the pattern, you do not need someone else's framework anymore. You can create your own.
 
-The ideal outcome is this: after using sdd-starter on one or two projects, you open a new project and tell your AI:
+The ideal outcome is this: after using sdd-brownfield on one or two projects, you open an existing project and tell your AI:
 
 > "Let's create an SDD framework for this project."
 
-And it does. Tailored to your stack, your team, your preferences. No starter repo needed. No templates to copy. Just you, your AI, and a process you already understand.
+And it does. Tailored to your stack, your team, your preferences. No framework repo needed. No templates to copy. Just you, your AI, and a process you already understand.
 
-sdd-starter exists to teach the pattern, not to own it.
+sdd-brownfield exists to teach the pattern, not to own it.
 
 ---
 
@@ -454,11 +441,11 @@ sdd-starter exists to teach the pattern, not to own it.
 
 Two other spec-driven development projects worth knowing:
 
-**[spec-kit](https://github.com/github/spec-kit)** — A CLI toolkit that implements a six-step SDD workflow: constitution → specify → plan → tasks → implement. Like sdd-starter, specs are written and approved before any code is written. Unlike sdd-starter, it requires installing a CLI tool (`specify-cli`) and invokes steps via slash commands inside an AI session. Works with 20+ AI agents.
+**[spec-kit](https://github.com/github/spec-kit)** — A CLI toolkit that implements a six-step SDD workflow: constitution → specify → plan → tasks → implement. Like sdd-brownfield, specs are written and approved before any code is written. Unlike sdd-brownfield, it requires installing a CLI tool (`specify-cli`) and invokes steps via slash commands inside an AI session. Works with 20+ AI agents.
 
-**[Kiro](https://github.com/kirodotdev/Kiro)** — An agentic IDE (macOS/Windows/Linux) by Amazon where spec-driven development is a first-class feature. A prompt is turned into a structured spec and implementation plan before the agent writes any code. Kiro also adds hooks, steering files, and MCP integration. Heavier than sdd-starter — a full IDE rather than a folder of Markdown files.
+**[Kiro](https://github.com/kirodotdev/Kiro)** — An agentic IDE (macOS/Windows/Linux) by Amazon where spec-driven development is a first-class feature. A prompt is turned into a structured spec and implementation plan before the agent writes any code. Kiro also adds hooks, steering files, and MCP integration. Heavier than sdd-brownfield — a full IDE rather than a folder of Markdown files.
 
-**sdd-starter** adds explicit workflow phases — Spec, Implement, and Test — each requiring your approval before the next begins. Features move through a tracked lifecycle from `draft` to `planned` to `implemented` to `done`, visible at a glance in `INDEX.md`. Neither spec-kit nor Kiro expose this kind of phase-gated progression as a first-class concept.
+**sdd-brownfield** adds explicit workflow phases — Spec, Implement, and Test — each requiring your approval before the next begins. Features move through a tracked lifecycle from `draft` to `planned` to `implemented` to `done`. Neither spec-kit nor Kiro expose this kind of phase-gated progression as a first-class concept.
 
 ---
 

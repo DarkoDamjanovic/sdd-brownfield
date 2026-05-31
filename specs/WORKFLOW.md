@@ -21,7 +21,6 @@ This file is self-contained. It can be copied into any project to apply the same
 specs/
   WORKFLOW.md             ← This file. The rules of engagement.
   PROJECT.md              ← High-level project description and personas
-  INDEX.md                ← All features and foundation items with current status
   templates/
     feature/              ← Templates for user-facing features
     foundation/           ← Templates for platform/infrastructure work
@@ -222,10 +221,6 @@ draft → planned → in-progress → implemented → done
 
 `blocked` can interrupt any active status. When the blocking dependency is resolved, status reverts to what it was before being blocked.
 
-Status is also mirrored in `INDEX.md` for a project-wide overview. **AI must keep both in sync.**
-
----
-
 ## The Workflow
 
 ### Phase 1: Spec (→ draft → planned)
@@ -291,20 +286,19 @@ If code is changed without going through the spec process:
 
 When working in this project, AI must:
 
-1. **Read `specs/WORKFLOW.md` and `specs/INDEX.md`** at the start of any spec-related task
+1. **Read `specs/WORKFLOW.md`** at the start of any spec-related task
 2. **Read `specs/PROJECT.md`** to understand the project context and personas before writing any spec or plan
 3. **Never implement** without an approved spec and plan
-4. **Keep status current** — update `requirements.md` frontmatter and `INDEX.md` whenever status changes
+4. **Keep status current** — update `requirements.md` frontmatter whenever status changes
 5. **Check off tasks** in `tasks.md` as implementation progresses
 6. **Parallelize when beneficial** — when independent tasks with no ordering constraints are ready at the same time, dispatch them to parallel subagents. Use judgment; not all tasks in the same phase are independent.
 7. **Verify dependency order before finalising `tasks.md`** — walk the full task list and confirm every task's prerequisites appear above it. Explicitly check for: infrastructure tasks (dependency updates, DI registrations, migrations), and tasks whose output is the input of a later task. Add any missing prerequisite tasks before proceeding.
 8. **List all new files in `plan.md` before creating them** — before finalising `plan.md`, enumerate every file that will be created under the `## New Files` section with its full path and purpose. If a task requires creating a file not yet listed there, update `plan.md` first. This ensures every file is permanently traceable to the spec that owns it.
-9. **Check `requires` before starting implementation** — read the `requires` frontmatter of the spec being implemented. Verify every listed spec is at status `implemented` or `done` in `INDEX.md`. If any prerequisite is incomplete, set status to `blocked`, note the blocking spec in `INDEX.md` `## Next Up`, and flag it to the user. When the dependency resolves, revert to the previous status.
+9. **Check `requires` before starting implementation** — read the `requires` frontmatter of the spec being implemented. Verify every listed spec is at status `implemented` or `done`. If any prerequisite is incomplete, set status to `blocked` and flag it to the user. When the dependency resolves, revert to the previous status.
 10. **Record decisions** in `decisions.md` when making non-obvious choices
 11. **Never delete** spec files — they are permanent records (git tracks history)
 12. **Ask for approval** at each phase gate before proceeding to the next phase
 13. **Reverse-propagate** any manual code changes back into the spec files immediately
-14. **Keep `## Next Up` current in `INDEX.md`** — after every status change or completed task, update the `## Next Up` section. List items in execution order: what is actively in progress, what is next in line, what is blocked and why. Maximum 5 entries. Remove an item once it reaches `done`. Foundation blockers must appear above the features they unblock.
 
 ---
 
